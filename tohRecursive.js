@@ -22,6 +22,4 @@ function tohRecursive(disks, start, dest, aux, aux2) {
   tohRecursive(disks - 2, aux, dest, start, aux2)
 }
 
-tohRecursive(4, 'A', 'D', 'B', 'C')
-
 module.exports = { tohRecursive }

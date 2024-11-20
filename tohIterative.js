@@ -64,6 +64,4 @@ function tohIterative(disks, start, dest, aux, aux2) {
   }
 }
 
-tohIterative(4, 'A', 'D', 'B', 'C')
-
 module.exports = { tohIterative }
