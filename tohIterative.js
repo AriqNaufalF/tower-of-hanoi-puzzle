@@ -1,85 +1,69 @@
 /**
- * Data structure to store rods and disks
- * @typedef {Object.<string, number[]>} Rods
- *
- */
-
-/**
- * Print disk movement
- * @param {string} from
- * @param {string} to
- * @param {number} disk
- */
-function logDiskMovement(from, to, disk) {
-  console.log(`Move disk ${disk} from ${from} to ${to}`)
-}
-
-/**
- * Move disk from one rod to another
- * @param {Rods} rods
- * @param {string} from
- * @param {string} to
- */
-function moveDisk(rods, from, to) {
-  const diskFrom = rods[from][rods[from].length - 1]
-  const diskTo = rods[to][rods[to].length - 1]
-
-  if (diskTo === undefined || diskFrom < diskTo) {
-    rods[from].pop()
-    rods[to].push(diskFrom)
-    logDiskMovement(from, to, diskFrom)
-  } else {
-    rods[to].pop()
-    rods[from].push(diskTo)
-    logDiskMovement(to, from, diskTo)
-  }
-}
-
-/**
- *
+ * 4 pegs Tower of Hanoi iterative solution
  * @param {number} disks - number of disks
- * @param {string} start - starting rod
- * @param {string} dest - destination rod
- * @param {string} aux - auxiliary rod
+ * @param {string} start - starting pole
+ * @param {string} dest - destination pole
+ * @param {string} aux - first auxiliary pole
+ * @param {string} aux2 - second auxiliary pole
  */
-function tohIterative(disks, start, dest, aux) {
-  /**
-   * Count total moves
-   * @type {number}
-   */
-  const totalMoves = Math.pow(2, disks) - 1
+function tohIterative(disks, start, dest, aux, aux2) {
+  const stack = []
+  stack.push({ disks, start, dest, aux, aux2, state: 0 })
 
-  /**
-   * @type {Rods}
-   */
-  const rods = {
-    [start]: [],
-    [aux]: [],
-    [dest]: [],
-  }
+  while (stack.length > 0) {
+    const frame = stack.pop()
 
-  // If disks are even, swap destination and auxiliary rods
-  if (disks % 2 === 0) {
-    ;[aux, dest] = [dest, aux]
-  }
+    if (frame.disks === 0) continue
 
-  //  Initialize the starting rod with disks
-  for (let i = disks; i >= 1; i--) {
-    rods[start].push(i)
-  }
+    if (frame.disks === 1) {
+      console.log(`Move disk 1 from ${frame.start} to ${frame.dest}`)
+      continue
+    }
 
-  // Move the disks
-  for (let i = 1; i <= totalMoves; i++) {
-    if (i % 3 === 1) {
-      moveDisk(rods, start, dest)
-    } else if (i % 3 === 2) {
-      moveDisk(rods, start, aux)
-    } else if (i % 3 === 0) {
-      moveDisk(rods, aux, dest)
+    switch (frame.state) {
+      case 0:
+        frame.state = 1
+        stack.push(frame)
+        stack.push({
+          disks: frame.disks - 2,
+          start: frame.start,
+          dest: frame.aux,
+          aux: frame.aux2,
+          aux2: frame.dest,
+          state: 0,
+        })
+        break
+      case 1:
+        console.log(
+          `Move disk ${frame.disks - 1} from ${frame.start} to ${frame.aux2}`
+        )
+        frame.state = 2
+        stack.push(frame)
+        break
+      case 2:
+        console.log(
+          `Move disk ${frame.disks} from ${frame.start} to ${frame.dest}`
+        )
+        frame.state = 3
+        stack.push(frame)
+        break
+      case 3:
+        console.log(
+          `Move disk ${frame.disks - 1} from ${frame.aux2} to ${frame.dest}`
+        )
+        stack.push({
+          disks: frame.disks - 2,
+          start: frame.aux,
+          dest: frame.dest,
+          aux: frame.start,
+          aux2: frame.aux2,
+          state: 0,
+        })
+        break
     }
   }
 }
 
-tohIterative(3, 'A', 'C', 'B')
+tohIterative(4, 'A', 'D', 'B', 'C')
 
 module.exports = { tohIterative }

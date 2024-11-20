@@ -12,31 +12,60 @@ describe('Test tower of hanoi iterative', () => {
     logSpy.mockRestore()
   })
 
-  test('should move 1 disk from A to C', () => {
-    tohIterative(1, 'A', 'C', 'B')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+  test('should move 1 disk from A to D', () => {
+    tohIterative(1, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
   })
 
-  test('should move 2 disks from A to C', () => {
-    tohIterative(2, 'A', 'C', 'B')
+  test('should move 2 disks from A to D', () => {
+    tohIterative(2, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to D')
+  })
+
+  test('should move 3 disks from A to D', () => {
+    tohIterative(3, 'A', 'D', 'B', 'C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to C')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from C to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to D')
   })
 
-  test('should move 3 disks from A to C', () => {
-    tohIterative(3, 'A', 'C', 'B')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+  test('should move 4 disks from A to D', () => {
+    tohIterative(4, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to B')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from D to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 4 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from C to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from B to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to D')
+  })
+
+  test('should move 5 disks from A to D', () => {
+    tohIterative(5, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from D to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 4 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 5 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 4 from C to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to A')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from B to C')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from B to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from B to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from C to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
   })
 })
 
-describe('Test tower of hanoi recursive', () => {
+describe('Test 4 pegs recursive tower of hanoi', () => {
   let logSpy
 
   beforeEach(() => {
@@ -47,26 +76,55 @@ describe('Test tower of hanoi recursive', () => {
     logSpy.mockRestore()
   })
 
-  test('should move 1 disk from A to C', () => {
-    tohRecursive(1, 'A', 'C', 'B')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+  test('should move 1 disk from A to D', () => {
+    tohRecursive(1, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
   })
 
-  test('should move 2 disks from A to C', () => {
-    tohRecursive(2, 'A', 'C', 'B')
+  test('should move 2 disks from A to D', () => {
+    tohRecursive(2, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to D')
+  })
+
+  test('should move 3 disks from A to D', () => {
+    tohRecursive(3, 'A', 'D', 'B', 'C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to C')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from C to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to D')
   })
 
-  test('should move 3 disks from A to C', () => {
-    tohRecursive(3, 'A', 'C', 'B')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+  test('should move 4 disks from A to D', () => {
+    tohRecursive(4, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to B')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from D to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 4 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from C to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from B to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to D')
+  })
+
+  test('should move 5 disks from A to D', () => {
+    tohRecursive(5, 'A', 'D', 'B', 'C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from D to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to B')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 4 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 5 from A to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 4 from C to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from B to A')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from B to C')
-    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from B to C')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 3 from B to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 2 from C to D')
+    expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
   })
 })
