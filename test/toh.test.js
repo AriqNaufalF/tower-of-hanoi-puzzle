@@ -1,7 +1,7 @@
 const { tohIterative } = require('../tohIterative')
 const { tohRecursive } = require('../tohRecursive')
 
-describe('Test tower of hanoi iterative', () => {
+describe('Test 4 pegs tower of hanoi iterative', () => {
   let logSpy
 
   beforeEach(() => {
@@ -13,19 +13,19 @@ describe('Test tower of hanoi iterative', () => {
   })
 
   test('should move 1 disk from A to D', () => {
-    tohIterative(1, 'A', 'D', 'B', 'C')
+    tohIterative(1, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
   })
 
   test('should move 2 disks from A to D', () => {
-    tohIterative(2, 'A', 'D', 'B', 'C')
+    tohIterative(2, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to D')
   })
 
   test('should move 3 disks from A to D', () => {
-    tohIterative(3, 'A', 'D', 'B', 'C')
+    tohIterative(3, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to D')
@@ -34,7 +34,7 @@ describe('Test tower of hanoi iterative', () => {
   })
 
   test('should move 4 disks from A to D', () => {
-    tohIterative(4, 'A', 'D', 'B', 'C')
+    tohIterative(4, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from D to B')
@@ -47,7 +47,7 @@ describe('Test tower of hanoi iterative', () => {
   })
 
   test('should move 5 disks from A to D', () => {
-    tohIterative(5, 'A', 'D', 'B', 'C')
+    tohIterative(5, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to B')
@@ -77,19 +77,19 @@ describe('Test 4 pegs recursive tower of hanoi', () => {
   })
 
   test('should move 1 disk from A to D', () => {
-    tohRecursive(1, 'A', 'D', 'B', 'C')
+    tohRecursive(1, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
   })
 
   test('should move 2 disks from A to D', () => {
-    tohRecursive(2, 'A', 'D', 'B', 'C')
+    tohRecursive(2, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from C to D')
   })
 
   test('should move 3 disks from A to D', () => {
-    tohRecursive(3, 'A', 'D', 'B', 'C')
+    tohRecursive(3, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to D')
@@ -98,7 +98,7 @@ describe('Test 4 pegs recursive tower of hanoi', () => {
   })
 
   test('should move 4 disks from A to D', () => {
-    tohRecursive(4, 'A', 'D', 'B', 'C')
+    tohRecursive(4, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to B')
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from D to B')
@@ -111,7 +111,7 @@ describe('Test 4 pegs recursive tower of hanoi', () => {
   })
 
   test('should move 5 disks from A to D', () => {
-    tohRecursive(5, 'A', 'D', 'B', 'C')
+    tohRecursive(5, 'A', 'D', 'B', 'C', true)
     expect(logSpy).toHaveBeenCalledWith('Move disk 1 from A to C')
     expect(logSpy).toHaveBeenCalledWith('Move disk 2 from A to D')
     expect(logSpy).toHaveBeenCalledWith('Move disk 3 from A to B')

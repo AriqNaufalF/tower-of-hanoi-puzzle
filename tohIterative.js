@@ -6,8 +6,9 @@
  * @param {string} aux - first auxiliary pole
  * @param {string} aux2 - second auxiliary pole
  */
-function tohIterative(disks, start, dest, aux, aux2) {
+function tohIterative(disks, start, dest, aux, aux2, print = false) {
   const stack = []
+  const message = []
   stack.push({ disks, start, dest, aux, aux2, state: 0 })
 
   while (stack.length > 0) {
@@ -16,7 +17,7 @@ function tohIterative(disks, start, dest, aux, aux2) {
     if (frame.disks === 0) continue
 
     if (frame.disks === 1) {
-      console.log(`Move disk 1 from ${frame.start} to ${frame.dest}`)
+      message.push(`Move disk 1 from ${frame.start} to ${frame.dest}`)
       continue
     }
 
@@ -34,21 +35,21 @@ function tohIterative(disks, start, dest, aux, aux2) {
         })
         break
       case 1:
-        console.log(
+        message.push(
           `Move disk ${frame.disks - 1} from ${frame.start} to ${frame.aux2}`
         )
         frame.state = 2
         stack.push(frame)
         break
       case 2:
-        console.log(
+        message.push(
           `Move disk ${frame.disks} from ${frame.start} to ${frame.dest}`
         )
         frame.state = 3
         stack.push(frame)
         break
       case 3:
-        console.log(
+        message.push(
           `Move disk ${frame.disks - 1} from ${frame.aux2} to ${frame.dest}`
         )
         stack.push({
@@ -62,6 +63,8 @@ function tohIterative(disks, start, dest, aux, aux2) {
         break
     }
   }
+
+  if (print) message.forEach((msg) => console.log(msg))
 }
 
 module.exports = { tohIterative }
